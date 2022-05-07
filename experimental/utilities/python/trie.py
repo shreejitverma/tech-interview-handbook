@@ -57,14 +57,10 @@ class Trie(object):
                 return '#' in node
             char = word[index]
             if char == '.':
-                for key in node.keys():
-                    if traverse(node[key], index+1):
-                        return True
+                return any(traverse(node[key], index+1) for key in node.keys())
+            if char not in node:
                 return False
-            else:
-                if char not in node:
-                    return False
-                return traverse(node[char], index + 1)
+            return traverse(node[char], index + 1)
         return traverse(self.d, 0)
 
 # Example
